@@ -1,0 +1,46 @@
+%!
+%% SPIRAL DEFS
+/inch { 72 mul } def
+/wood-rad 210 def       % radius of wooden disk
+/text-rad wood-rad .92 mul def  % radius of outer spiral text
+/ben-rad text-rad .46 mul def   % radius of Benham's ring
+%/downscale 1 def           % reduction in scale after each letter
+/downscale .99700 def           % reduction in scale after each letter
+/angle  -2.400   def            % rotation after each letter
+
+/text (Yes I had this problem earlier this year and A. Kinsman \
+<kinsman@crestone> of Eastman Kodak kindly posted this code \
+which produced exactly the effect I wanted and I was very \
+pleased indeed to get hold of it - but don't ask me how or why it \
+works ...I'm just happy to use it...  ) def
+
+gsave
+298 390 translate
+% place the spiral text
+0.0 setgray
+/Times-Roman findfont 48 scalefont setfont
+0 1 text length 1 sub {
+    text exch get ( ) dup 0 4 -1 roll put               % ( char-string -- )
+    %V1 dup stringwidth pop 2 div neg text-rad moveto   % ( char-string -- )
+    %V2 -.08 inch text-rad moveto       % ( char-string -- )
+    gsave
+    0 text-rad moveto   % ( char-string -- )
+    -2.2 rotate
+    % 1 setlinecap                                      % DEBUG
+    % 0 0 rlineto stroke                                % DEBUG
+    % dup stringwidth pop 2 div neg text-rad moveto     % DEBUG
+    dup show                                       % ( char-string -- )
+    grestore
+    downscale dup scale
+    stringwidth pop text-rad atan neg rotate
+} for
+grestore
+showpage
+(spiral.ps done) print
+
+%--
+%gerry pratt - workstation support programmer - university of keele - ENGLAND
+%email:  gerry@seq1.keele.ac.uk ( DYNIX? - just say no!! ) tel:UK 0782 583072
+%"these opinions are mine, mine, Mine, Mine, MINE......ALL MINE I TELL YOU!!"
+%
+

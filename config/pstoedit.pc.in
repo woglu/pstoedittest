@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: pstoedit
+Description: converts PostScript(TM) and PDF files to other vector graphic formats
+Version: @VERSION@.0
+Requires: 
+Libs: -L@libdir@ -lpstoedit @CXX_STD_LIB@ @CXX_RUNTIME_LIB@ @LIBLD_LDFLAGS@
+Cflags: -I@includedir@

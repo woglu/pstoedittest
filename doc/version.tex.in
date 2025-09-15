@@ -1,0 +1,4 @@
+% \setVersionWord{Version:}  %%% that's the default, no need to set it.
+\setVersion{@PACKAGE_VERSION@}
+%\setDate{April 2013}
+%\setVersion{3.62}

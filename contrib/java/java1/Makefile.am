@@ -1,0 +1,1 @@
+EXTRA_DIST=PsDrawing.java PsPages.java readme_java1.txt

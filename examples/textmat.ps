@@ -1,0 +1,42 @@
+%!PS
+%
+% shows text in all different orientations
+% some combinations of the loops below might result in not meaningful CTMs and are
+% suppressed in that case.
+%
+% Wolfgang Glunz (wglunz@geocities.com)
+%
+/x 100 def
+/y 100 def
+/fontSize 20 def
+/Times-Roman findfont fontSize scalefont setfont
+
+/boxedshow {
+	currentpoint /y1 exch def /x1 exch def
+	(TEstg) show
+	currentpoint /y2 exch def /x2 exch def
+	x1 y1 moveto x2 y1 lineto x2 y1 fontSize add lineto x1 y1 fontSize add lineto closepath stroke
+} def
+
+-1 1 1 { 
+	/m1 exch def
+	-1 1 1 { 
+		/m2 exch def
+		-1 1 1 { 
+			/m3 exch def
+			-1 1 1 { 
+				/m4 exch def
+				x y moveto 
+				gsave
+				 [ m1 m2 m3 m4 0  0 ]  concat 
+				{ currentpoint pop pop } stopped not { boxedshow } if
+				grestore
+				y 40 add /y exch def
+				y 700 gt {
+					/y 100 def
+					/x x 100 add def
+				} if
+			} for
+		} for
+	} for
+} for

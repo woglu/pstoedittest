@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Pstoedit QT GUI
+Comment=GUI for pstoedit
+Exec=PstoeditQtGui
+Terminal=false
+Type=Application
+Icon=pstoedit
+Categories=Utility;Graphics;VectorGraphics;ImageProcessing
+X-Desktop-File-Install-Version=0.27

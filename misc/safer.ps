@@ -1,0 +1,4 @@
+% disallow all file ops
+/file        { (Your PostScript program tried to use an unsafe operation \(file\) \n) print quit } bind def
+/renamefile  { (Your PostScript program tried to use an unsafe operation \(renamefile\) \n) print quit } bind def
+/deletefile  { (Your PostScript program tried to use an unsafe operation \(deletefile\) \n) print quit } bind def

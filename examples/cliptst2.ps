@@ -1,0 +1,51 @@
+%!PS
+
+0.5 0.5 scale
+
+/Times-Roman findfont 50 scalefont setfont
+
+/X {
+gsave
+200 100 moveto
+200 500 lineto
+100 200 lineto
+300 300 lineto
+100 400 lineto
+200 100 lineto
+
+%clip or eoclip
+cvx exec
+
+clippath
+
+0.5 0 0 setrgbcolor
+%fill or eofill or stroke
+cvx exec
+
+80 300 moveto
+0 0 0 setrgbcolor
+(Hello World) show
+
+grestore
+
+20 100 moveto show
+
+} def
+
+gsave
+(ECEF) /eofill /eoclip X
+0 400 translate
+(EC F) /fill   /eoclip X
+0 400 translate
+(EC S) /stroke /eoclip X
+300 0 translate
+( C S) /stroke /clip   X
+0 -400 translate
+( C F) /fill   /clip   X
+0 -400 translate
+( CEF) /eofill /clip   X
+grestore
+
+
+showpage
+ 

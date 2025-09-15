@@ -1,0 +1,26 @@
+# basics for building and running
+
+apt install autoconf
+apt install libtool
+apt install pkg-config
+apt install make
+apt install g++
+apt install ghostscript
+
+# for enabling some optional drivers
+apt install libzip-dev
+apt install libemf-dev
+apt install libplot-dev
+
+# for creating all the documentation
+apt install texlive-binaries
+apt install texlive-latex-base
+apt install texlive-plain-generic
+apt install texlive-latex-recommended
+
+# for enabling the QT GUI
+apt install qt6-base-dev
+
+# optional - for static checking only
+apt install cppcheck
+apt install clang

@@ -1,0 +1,117 @@
+%!
+<< /PageSize [792 612] >> setpagedevice
+% Optical illusion
+% written by Woody Baker
+% Rt.1 Box I
+% Manor, Tx. 78653
+%
+% hereby placed in the public domain.  Would appreciate the header
+% remaining in-tact.
+%
+
+%
+% do 1/4th of the drawing
+%
+/onequarter
+	{
+	60 160 moveto
+	20 160 lineto
+	20 80 lineto
+	160 80 lineto
+	60 180 moveto
+	0 180 lineto
+	0 60 lineto
+	160 60 lineto
+	40 160 moveto
+	40 100 lineto
+	160 100 lineto
+	60 200 moveto
+	20 200 lineto
+	0 180 lineto
+	40 100 moveto
+	20 80 lineto
+	} def
+%
+% draw the illusion and label it
+%	
+/optical
+	{	
+	0 0 moveto onequarter
+	gsave
+	-90 rotate -260 0 translate onequarter
+	-90 rotate -260 0 translate onequarter
+	-90 rotate -260 0 translate onequarter
+	stroke
+	grestore
+	/Helvetica findfont 20 scalefont setfont
+	-10 -25 moveto
+	(Brought to you By Woody Baker) show
+	} def
+%
+% application code.  Positions and scales and draws the actual
+% illusion.
+%	
+/xcoord 140 def
+/ycoord 240 def	
+gsave	
+xcoord ycoord translate
+1 1 scale
+optical
+grestore
+showpage
+%!
+% M. C. Escher style impossible triangle
+% written by Guy Shaw
+
+% Things that are easy to play with:
+% Position on paper, overall size, and linewidth
+/inch { 72 mul } bind def
+
+2 inch dup translate
+3 inch dup scale
+1 3 inch div setlinewidth
+
+% Thickness parameter:
+% /Thick is the thickness of the structural members of the triange,
+% as a fraction of the height of the triangle.
+% Reasonable looking impossible triangles can be obtained with Thick <= 1/6.
+% right at /Thick == 1/6, there is no space left inside the triangle.
+% /Thick > 1/6 yields bizarre, but not very interesting results.
+% /Thick < 1/20 is less interesting, because the "impossibility"
+% is not so striking when the structural members are that thin.
+% A good "standard" value is 1/8.
+
+/Thick 1 8 div def
+
+% You would not normally want to change anything that follows.
+
+/Tall 1 def
+/HalfThick Thick .5 mul def
+
+newpath
+	HalfThick Thick moveto
+	Thick  0 lineto
+	1 Thick sub  0 lineto
+	1 HalfThick sub  Thick lineto
+	.5 HalfThick add  Tall Thick sub lineto
+
+	1 Thick sub  0 moveto
+	.5 HalfThick add  Tall 3 Thick mul sub lineto
+	Thick 3 mul  Thick 2 mul lineto
+
+	1 Thick 2.5 mul sub  Thick moveto
+	.5  Tall Thick 4 mul sub lineto
+stroke
+
+0.7 setgray
+newpath
+	HalfThick Thick moveto
+	1 Thick 2.5 mul sub  Thick lineto
+	HalfThick neg  Thick rlineto
+	Thick Thick add  Thick Thick add lineto
+	.5 HalfThick add  Tall Thick sub lineto
+	Thick neg  0 rlineto
+	closepath
+fill
+
+showpage

@@ -1,0 +1,17 @@
+%
+% Demo example for the -ssp option
+% try pstoedit -ssp -dt -f fig letters.ps lettersssp.fig
+% vs 
+% pstoedit -dt -f fig letter2.ps letters.fig
+%
+/Times-Roman findfont 40 scalefont setfont
+
+90 rotate
+0 -700 translate
+
+50 300 moveto
+(abcdefghijklmnopqrstuvwxyz) show
+50 500 moveto
+(ABCDEFGHIJKLMNOPQRSTUVWXYZ) show
+showpage
+

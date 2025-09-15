@@ -1,0 +1,60 @@
+%!
+% Optical illusion
+% written by Woody Baker
+% Rt.1 Box I
+% Manor, Tx. 78653
+%
+% hereby placed in the public domain.  Would appreciate the header
+% remaining in-tact.
+%
+
+%
+% do 1/4th of the drawing
+%
+/onequarter
+	{
+	60 160 moveto
+	20 160 lineto
+	20 80 lineto
+	160 80 lineto
+	60 180 moveto
+	0 180 lineto
+	0 60 lineto
+	160 60 lineto
+	40 160 moveto
+	40 100 lineto
+	160 100 lineto
+	60 200 moveto
+	20 200 lineto
+	0 180 lineto
+	40 100 moveto
+	20 80 lineto
+	} def
+%
+% draw the illusion and label it
+%	
+/optical
+	{	
+	0 0 moveto onequarter
+	gsave
+	-90 rotate -260 0 translate onequarter
+	-90 rotate -260 0 translate onequarter
+	-90 rotate -260 0 translate onequarter
+	stroke
+	grestore
+	/Helvetica findfont 20 scalefont setfont
+	-10 -25 moveto
+	(Brought to you By Woody Baker) show
+	} def
+%
+% application code.  Positions and scales and draws the actual
+% illusion.
+%	
+/xcoord 140 def
+/ycoord 240 def	
+gsave	
+xcoord ycoord translate
+1 1 scale
+optical
+grestore
+showpage

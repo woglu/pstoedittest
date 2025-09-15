@@ -1,0 +1,1 @@
+SUBDIRS=java1 java2

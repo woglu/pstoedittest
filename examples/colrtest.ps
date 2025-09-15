@@ -1,0 +1,24 @@
+%!PS
+/Helvetica findfont 10 scalefont setfont
+/cm { 28.35 mul } def		%  Centimetres to PostScript units
+/str 20 string def
+/Increment 20 def		%  Go around in 1 degree increments
+10.5 cm 14.85 cm translate	%  Place origin at middle of A4 page
+2 cm setlinewidth		%  Set fat line width
+1 Increment 360 {		%  Go around the circle
+	360 div 1 1 sethsbcolor	%  HSB color H = angle/360, S = 100%, B =  100%
+	0 0 8 cm 0 Increment arc%  Draw a 1 degree arc
+	stroke			%  stroke it
+	currentrgbcolor
+	3 1 roll exch		%  reorder from r g b to b g r so that r is printed first
+	Increment 2 div rotate	%  Rotate the coordinate system
+	gsave
+	4 cm  0 moveto
+	(R) show 256 mul cvi str cvs show ( ) show
+	(G) show 256 mul cvi str cvs show ( ) show
+	(B) show 256 mul cvi str cvs show
+	grestore
+	Increment 2 div rotate	%  Rotate the coordinate system
+	%Increment rotate	%  Rotate the coordinate system
+} for
+showpage			%  Display the page

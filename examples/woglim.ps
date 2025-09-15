@@ -1,0 +1,39 @@
+
+
+/rstring 3 string def
+
+/r 0 def
+/g 0 def
+/b 0 def
+
+/allcolors {
+rstring 0 r put
+rstring 1 g put
+rstring 2 b put
+/r r 16 add store
+r 255 gt {
+	/r 0 store
+	/g g 16 add store
+	g 255 gt {
+		/g 0 store
+		/b b 16 add store
+		b 255 gt {
+			/b 0 store
+		} if
+	} if
+} if
+%r g b pstack pop pop pop
+rstring
+} def
+
+100 100 translate
+30 rotate
+5 5 scale
+
+64 64 8 [1 0 0 1 0 0 ] { allcolors } false 3 colorimage
+0 0 moveto 64 0 lineto 64 64 lineto 0 64 lineto 0 0 lineto stroke
+
+showpage
+
+
+ 

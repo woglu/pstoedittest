@@ -1,0 +1,114 @@
+/smartimage12rgb { % w h b [matrix] smartimage12rgb -
+    /colorimage where {
+	pop
+	{ returndata }
+	false 3
+	colorimage
+    } {
+	exch pop 8 exch
+	3 index 12 mul 8 mod 0 ne { 1 } { 0 } ifelse
+	4 index
+	6 2 roll
+	{ 2 copy cvgray }
+	image
+	pop pop
+    } ifelse
+} def
+%/imagedata 3756 string def
+%/imagedata 1878 string def
+/imagedata 1800 string def
+/returndata { imagedata } def
+/rowdata 24 string def
+currentfile imagedata readhexstring
+aaaa55ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffdddfccffffffffffffffffffffffff
+f66f33ffff99f66ffff66f33fffffffffffffffffffffffff66f33ffff66f33ffff66f33ffffff
+fffffffffffffffffff66f33ffff66f33ffff66f33fffffffffffffffffffffffff66f00f33f33
+f00f33f33f33fffffffffffffffffffffffff99f33f33f33f33f33f33f66ffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+fffffffffffffffffffffffff99f33f33f33f33f33f33f66fffffffffffffffffffffffff66f00
+f33f33f33f33f33f66fffffffffffffffffffffffff99f00f00f66f99eeeffffffffffffffffff
+fffffffffffffffffffccf66f33f00f66f99fffffffffffffffffffffffffffffffffdddf99f33
+f00f33fffffffffffffffffffffffffccf66f33f00f33f66f99fffffffffffffffffffffffffff
+f66f00f66f99fccfccfccfccfffffffffffffffffffffffff66f00f00f00f00f00f00f33ffffff
+ffffffffffffffffffdddfccfccfccfccfccfccfccffffffffffffffffffffffffffffffffffff
+fffffffffffffffffffffffffffffffffffffffffffccf99f66fccffffffffffffffffffffffff
+ffffffffff66f00f00f00f00f33eeefffffffffffffffffffffffff99f00f99fffffffccf33f66
+fffffffffffffffffffffffff66f66fffffffffffff99f33fffffffffffffffffffffffff66f66
+fffffffffffff99f33fffffffffffffffffffffffff99f00f66fccfccf99f00f66ffffffffffff
+ffffffffffffffff99f00f00f00f00f66fffffffffffffffffffffffffffffffffffffccfccfff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+fccf66f66f66f66f66f66f99fffffffffffffffffffffffff66f00f00f00f00f00f00f33ffffff
+ffffffffffffffffffffffffffff33f66fffffffffffffffffffffffffffffffffffffffffff33
+f66fffffffffffffffffffffffffffffffffdddfccfccf33f66fccfccfccffffffffffffffffff
+fffffff66f00f00f00f00f00f00f33ffffffffffffffffffffffffdddfccfccfccfccfccfccfcc
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+112233445566
+
+%(after read) print
+pop
+pop
+/oldonefig {
+gsave
+100 100 translate
+%276.5 659 translate
+-10 0 moveto -10  50 lineto 50 0 lineto closepath fill %stroke 
+11.2 52.5 scale 
+16 75 4 [16 0 0 -75 0 75] smartimage12rgb
+grestore
+} def
+
+/onefig {
+gsave
+100 100 translate
+%276.5 659 translate
+-10 0 moveto -10  50 lineto 50 0 lineto closepath fill %stroke 
+gsave
+11.2 52.5  scale 
+%11.2 0.7 div 52.5  0.7 div scale 
+16 75 4 [16 0 0 -75 0 75] smartimage12rgb
+grestore
+0 0 200 setrgbcolor
+0.7 0.7 scale
+0 0 moveto 0 75 lineto 16 75 lineto 16 0 lineto 0 0 lineto stroke
+grestore
+} def
+
+/Times-Roman findfont 10 scalefont setfont
+
+0 30 330 {
+dup
+gsave
+300 300 translate
+rotate 
+150 150 moveto 100 string cvs show
+onefig
+grestore
+} for
+
+showpage
+ 
+ 

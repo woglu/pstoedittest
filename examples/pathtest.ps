@@ -1,0 +1,33 @@
+% closepath !!
+
+/Times-Roman findfont 10 scalefont setfont
+
+0.7 0.5 0.1 setrgbcolor
+
+200 200 moveto 300 300 lineto stroke
+
+
+0.2 0.5 0.7 setrgbcolor
+
+/p {
+newpath
+100 100 moveto
+200 100 lineto
+150 400 lineto
+200 200 moveto
+200 300 lineto
+200 400 100 400 100 200 curveto
+} def
+
+p eofill
+100 80 moveto (eofilled) show
+
+200 0 translate p fill
+100 80 moveto (filled) show
+
+200 0 translate p stroke
+100 80 moveto (stroke) show
+
+
+showpage
+ 

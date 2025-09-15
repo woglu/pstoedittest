@@ -1,0 +1,32 @@
+#################################################################################
+# pstoedit documentation
+#################################################################################
+
+#################################################################################
+# translation for MAN
+#################################################################################
+
+# LaTeX macros without arguments
+$manMacro{'LaTeX'} 	= 'LaTeX';
+$manMacro{'TeX'} 	= 'TeX';
+
+#################################################################################
+# translation for HTML
+#################################################################################
+
+# LaTeX macros without arguments
+$htmlMacro{'LaTeX'} 	= 'LaTeX';
+$htmlMacro{'TeX'} 	= 'TeX';
+
+#################################################################################
+# translation for TexInfo
+#################################################################################
+
+# LaTeX macros without arguments
+$texiMacro{'LaTeX'} 	= 'LaTeX';
+$texiMacro{'TeX'} 	= 'LaTeX';
+
+# LaTeX macros with single argument
+$manMacro1a{'Anchor'} 	= '\\"';	$manMacro1b{'Anchor'} 	= '';
+$htmlMacro1a{'Anchor'} 	= '<a id="';	$htmlMacro1b{'Anchor'} 	= '"></a>';
+$texiMacro1a{'Anchor'} 	= '\n';	$texiMacro1b{'Anchor'} 	= '';
