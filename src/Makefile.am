@@ -8,10 +8,6 @@ if HAVE_LIBPLOTTER
 LIBPLOTTER_ENTRY=libp2edrvlplot.la
 endif
 
-if HAVE_LIBMING
-LIBMING_ENTRY=libp2edrvswf.la
-endif
-
 if HAVE_LIBZIP
 LIBPPTX_ENTRY=libp2edrvpptx.la
 endif
@@ -26,7 +22,6 @@ endif
 
 AM_CPPFLAGS=					\
 	${LIBPLOTTER_CFLAGS}			\
-	${LIBMING_CFLAGS}			\
 	${MKSTEMP_CFLAGS}			\
 	${LIBMAGICK_CFLAGS}			\
 	${LIBEMF_CFLAGS}			\
@@ -43,7 +38,6 @@ bin_PROGRAMS=pstoedit
 pkglib_LTLIBRARIES=libp2edrvstd.la		\
 	${LIBPLUGINS_ENTRY}			\
 	${LIBPLOTTER_ENTRY}			\
-	${LIBMING_ENTRY}			\
 	${LIBPPTX_ENTRY}			\
 	${LIBMAGICK_ENTRY}			\
 	${LIBEMF_ENTRY}
@@ -91,6 +85,7 @@ libp2edrvstd_la_SOURCES=			\
 	drvtk.cpp	drvtk.h                 \
 	drvvtk.cpp	drvvtk.h                \
 	drvsvm.cpp	drvsvm.h svm_actions.h	\
+	drvsvg.cpp	drvsvg.h                \
 	$(specific_drivers_src)                 \
         $(sample_drivers_src)                   
 libp2edrvstd_la_LIBADD=libpstoedit.la
@@ -110,10 +105,6 @@ libp2edrvlplot_la_LDFLAGS=-no-undefined -module -avoid-version
 libp2edrvpptx_la_SOURCES=drvpptx.cpp drvpptx.h initlibrary.cpp
 libp2edrvpptx_la_LIBADD=$(LIBZIP_LDFLAGS) libpstoedit.la
 libp2edrvpptx_la_LDFLAGS=-no-undefined -module -avoid-version
-
-libp2edrvswf_la_SOURCES=drvswf.cpp drvswf.h initlibrary.cpp
-libp2edrvswf_la_LIBADD=$(LIBMING_LDFLAGS) libpstoedit.la
-libp2edrvswf_la_LDFLAGS=-no-undefined -module -avoid-version
 
 # note the __ stand for ++ - automake treats all no alphanums chars as _
 libp2edrvmagick___la_SOURCES=drvmagick++.cpp drvmagick++.h initlibrary.cpp

@@ -285,10 +285,13 @@ public:
 		DXF_LineType::handle++;
 		return out;
 	}
+	static void init() {
+		scalefactor = 1.0;
+		handle = 0xF0;
+	}
 	static double scalefactor;
 	static int handle;
 private:
-	
 	const char * const m_name;
 	const char * const m_description;
 	const std::vector<double> m_pattern;

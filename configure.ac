@@ -10,7 +10,7 @@ dnl       as those are all the systems I have access to.
 dnl ------------------------------------------------------------------------
 
 dnl Initialize Autoconf. 
-AC_INIT([pstoedit],[4.02],[wglunz35_AT_pstoedit.net],[],[http://www.pstoedit.com])
+AC_INIT([pstoedit],[4.03],[wglunz35_AT_pstoedit.net],[],[http://www.pstoedit.com])
 
 dnl Check Ghostscript
 AC_CHECK_PROGS([GS],[gs],[false])
@@ -81,12 +81,12 @@ if test -n "${LIBLD_LDFLAGS}"; then
 fi
 AC_SUBST(LIBLD_LDFLAGS)
 
-AC_CHECK_LIB([gd],[gdImageCreateFromPng])
+dnl - not longer needed AC_CHECK_LIB([gd],[gdImageCreateFromPng])
 
 dnl some optional packages - default is to check automatically
 dnl but the check can be disabled using --without-PACKAGE
 dnl legal PACKAGE names are:
-dnl emf, magick, libplot, swf
+dnl emf, magick, libplot 
 
 # When doc regeneration is enabled, these are needed:
 AC_CHECK_PROGS([PDFLATEX],[pdflatex],[false])
@@ -126,9 +126,6 @@ AC_ARG_WITH([gui],
 AC_ARG_WITH([libplot],
 [AS_HELP_STRING([--with-libplot],[enable/disable libplot interface (default: enabled - use --without-libplot to disable)])],
 [with_libplot=$withval],[with_libplot=yes])
-AC_ARG_WITH([swf],
-[AS_HELP_STRING([--with-swf],[enable/disable swf interface (default: enabled - use --without-swf to disable)])],
-[with_swf=$withval],[with_swf=yes])
 AC_ARG_WITH([pptx],
 [AS_HELP_STRING([--with-pptx],[enable/disable pptx interface (default: enabled - use --without-pptX to disable)])],
 [with_pptx=$withval],[with_pptx=yes])
@@ -240,37 +237,6 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <stdlib.h>
 
 AC_SUBST(MKSTEMP_CFLAGS)
 
-
-
-if test "${with_swf}" = "yes" ; then
-dnl
-dnl Driver::libming
-dnl
-HAVE_LIBMING=no
-LIBMING_LDFLAGS=
-LIBMING_CFLAGS=
-
-dnl If mingpp.h is found, use it.
-AC_CHECK_LIB(ming,main,
-	[LIBMING_LDFLAGS=-lming],,-lm)
-AC_CHECK_HEADER(mingpp.h,
-	[LIBMING_CFLAGS="-DHAVE_LIBMING"])
-if test -n "${LIBMING_LDFLAGS}" && test -n "${LIBMING_CFLAGS}"; then
-   HAVE_LIBMING=yes
-   dnl legacy for old versions of ming. AC_CHECK_HEADER(util/png2dbl.c,[LIBMING_CFLAGS="$LIBMING_CFLAGS -DHAVE_LIBMINGUTIL"])
-   AC_MSG_RESULT([** libming driver is enabled.])
-else
-   LIBMING_LDFLAGS=
-   LIBMING_CFLAGS=
-   AC_MSG_WARN([** libming driver is disabled.])
-fi
-AC_SUBST(LIBMING_LDFLAGS)
-AC_SUBST(LIBMING_CFLAGS)
-AM_CONDITIONAL(HAVE_LIBMING, test "$HAVE_LIBMING" = yes)
-else
-   AC_MSG_WARN([swf support disabled by configure argument .])
-   AM_CONDITIONAL(HAVE_LIBMING, false )
-fi
 
 if test "${with_pptx}" = "yes" ; then
 dnl
@@ -585,7 +551,7 @@ doc/version.tex
 examples/Makefile 
 contrib/Makefile contrib/cairo/Makefile
 contrib/java/Makefile contrib/java/java1/Makefile contrib/java/java2/Makefile 
-misc/Makefile misc/swffonts/Makefile 
+misc/Makefile 
 QT/Makefile  QT/PstoeditQtGui/Makefile
 msdev/Makefile othersrc/Makefile othersrc/gsdllinc/Makefile])
 

@@ -300,12 +300,7 @@ void PSImage::calculateBoundingBox()
 
 void PSImage::writeEPSImage(ostream & outi) const
 {
-	if (isFileImage) {
-#ifdef HAVE_LIBGD
-// this code looks to be obsolete now. Only driver using png for internal image transfer
-// was drvasy. Changed that to memoryeps - so "isFileImage" should be false then
-// when writeEPSImage is being called from drvasy.
-// wogl: 180513
+   if (isFileImage) {
 #if 1
 		static bool first = true;
 		if (first) {
@@ -317,6 +312,11 @@ void PSImage::writeEPSImage(ostream & outi) const
 		return;
 
 #else
+// this code looks to be obsolete now. Only driver using png for internal image transfer
+// was drvasy. Changed that to memoryeps - so "isFileImage" should be false then
+// when writeEPSImage is being called from drvasy.
+// wogl: 180513
+#ifdef HAVE_LIBGD
 		FILE* in = fopen(FileName.c_str(),"rb");
 		if (!in) { 
 			cerr << "Error opening file " <<FileName.c_str() << endl;
@@ -389,7 +389,6 @@ void PSImage::writeEPSImage(ostream & outi) const
 		
 		gdImageDestroy(im);
 		return;
-#endif
 #else
 		static bool first=true;
 		if(first) {
@@ -398,7 +397,8 @@ void PSImage::writeEPSImage(ostream & outi) const
 		}
 		return;
 #endif
-	}
+#endif
+   } else {
 	assert(data);
 	// output the image data along with decoding procedure
 	// into a separate *.eps file
@@ -471,6 +471,7 @@ void PSImage::writeEPSImage(ostream & outi) const
 	outi << "%%Trailer" << endl;
 	outi << "%%EOF" << endl;
 	outi << dec;
+   }
 }
 
 void PSImage::writeIdrawImage(ostream & outi, float scalefactor) const

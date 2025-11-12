@@ -1954,14 +1954,8 @@ YY_RULE_SETUP
 						if (driverDesc->backendFileOpenType != DriverDescription::opentype::noopen ){ 
 							outputFilePtr->close();
 							if (driverDesc->backendFileOpenType == DriverDescription::opentype::binaryopen ) { 
-// old if (defined(unix) || defined(__unix__) || defined(_unix) || defined(__unix) || defined(__EMX__) || defined (NetBSD) ) && !defined(DJGPP)
-#if defined(PSTOEDIT_UNIXLIKE)
-// binary is not available on UNIX, only on PC
-								outputFilePtr->open(newFileName.c_str(),ios::out);
-#else
 								// use redundant ios::out because of bug in djgpp
 								outputFilePtr->open(newFileName.c_str(),ios::out | ios::binary);
-#endif
 								// errf << "opened " << newFileName.c_str() << " for binary output" << endl;
 							} else {
 								outputFilePtr->open(newFileName.c_str());

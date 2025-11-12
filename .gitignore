@@ -39,3 +39,6 @@
 
 # debug information files
 *.dwo
+
+sync.ffs_db
+showdiff.sh

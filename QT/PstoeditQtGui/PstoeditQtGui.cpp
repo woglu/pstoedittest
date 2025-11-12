@@ -1,7 +1,7 @@
 /*
    PstoeditQtGUI.cpp : This file is part of pstoedit. Implementation of the QT GUI.
   
-   Copyright (C) 1993 - 2024 Wolfgang Glunz, wglunz35_AT_pstoedit.net
+   Copyright (C) 1993 - 2025 Wolfgang Glunz, wglunz35_AT_pstoedit.net
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -100,6 +100,10 @@ PstoeditQtGui::PstoeditQtGui(int argc_p, char ** argv_p, std::ostream& logStream
 #endif
 	UrlOfPstoeditHtml += QString("/pstoedit.htm");
 	UrlOfPstoeditHtml.replace(QString("\\"), QString("/"));
+
+	connect(&HTTPmanager, &QNetworkAccessManager::finished,
+		    this, &PstoeditQtGui::ReplyFinished);
+	HTTPmanager.setAutoDeleteReplies(true);
 }
 
 void PstoeditQtGui::fillTabWithOptions(int new_tab_index, ProgramOptions* options,  int sheet, unsigned int opttype, QFormLayout* layout, const char* anchorprefix)
@@ -534,14 +538,29 @@ void PstoeditQtGui::OpenGUIHelpDocument() const {
 
 void PstoeditQtGui::ReplyFinished(QNetworkReply* reply) {
 	const QString answer = reply->readAll();
+	if (!answer.length() || answer.startsWith("404")) {
+		if (Verbose()) {
+			cout << "Could not retrieve latest_version.txt from server." << endl;
+		}
+		QMessageBox::information(this, QString("Pstoedit"), QString("Could not retrieve latest_version.txt from server."));
+		return;
+	}
 	const double latest_version = answer.toFloat();
-	const double current_version = QString(get_pstoedit_version()).toFloat();
+	const char * const my_version_string = get_pstoedit_version();
+	if (!my_version_string || !strlen(my_version_string)) {
+		if (Verbose()) {
+			cout << "Could not retrieve current pstoedit version." << endl;
+		}
+		QMessageBox::information(this, QString("Pstoedit"), QString("Could not retrieve current pstoedit version."));
+		return;
+	}
+	const double current_version = QString(my_version_string).toFloat();
 	if (Verbose()) {
-		cout << "version.txt has: " << answer.toStdString().c_str() << ":" << latest_version << " your version is " << current_version << endl;
+		cout << "latest_version.txt has: " << answer.toStdString().c_str() << ":" << latest_version << " your version is " << current_version << endl;
 	}
 	if (latest_version > current_version) {
 		std::stringstream message;
-		message << "New version " << answer.toStdString().c_str() << " is available. Your version is " << current_version << endl;
+		message << "New version " << answer.toStdString().c_str() << " is available. Your version is " << my_version_string << endl;
 		message << "Get new version from https://sourceforge.net/projects/pstoedit/files/pstoedit/" << endl;
 		QMessageBox::information(this, QString("Pstoedit"), message.str().c_str());
 	} else if (latest_version < current_version) {
@@ -554,12 +573,7 @@ void PstoeditQtGui::ReplyFinished(QNetworkReply* reply) {
 }
 
 void PstoeditQtGui::CheckForUpdates() {
-	auto status = connect(&HTTPmanager, &QNetworkAccessManager::finished,
-						  this, &PstoeditQtGui::ReplyFinished);
-	if (Verbose()) {
-		cout << "Connection status:" << status << endl;
-	}
-	HTTPmanager.get(QNetworkRequest(QUrl("https://wglunz.users.sourceforge.net/version.txt")));
+	HTTPmanager.get(QNetworkRequest(QUrl("https://woglu.github.io/pstoedit_web/latest_version.txt")));
 };
 
 void PstoeditQtGui::About() {
@@ -567,7 +581,7 @@ void PstoeditQtGui::About() {
 	message << "**About pstoedit**\n\n"
 		       "Pstoedit version: ";
 	message << get_pstoedit_version() << "  \n" ;
-	message <<	"Copyright (C) 1993 - 2024 Wolfgang Glunz " << "  \n"
+	message <<	"Copyright (C) 1993 - 2025 Wolfgang Glunz " << "  \n"
 				"All rights reserved" << "  \n"
 				"Pstoedit home page:  [www.pstoedit.com](http://www.pstoedit.com \"pstoedit home page\")" << "  \n"
 				"Refer to license.txt for conditions of distribution and use.\n\n"
@@ -582,11 +596,10 @@ void PstoeditQtGui::About() {
 };
 
 void PstoeditQtGui::SupportPstoeditDevelopmentandMaintenance() const {
-	QDesktopServices::openUrl(QUrl("https://wglunz.users.sourceforge.net/pstoedit_donate.htm", QUrl::StrictMode));
+	QDesktopServices::openUrl(QUrl("https://woglu.github.io/pstoedit_web/pstoedit_donate.htm", QUrl::StrictMode));
 };
 
 void PstoeditQtGui::Get_Support_or_open_a_Ticket() const {
-	// QDesktopServices::openUrl(QUrl("https://pstoedit.sourceforge.io", QUrl::StrictMode));
 	QDesktopServices::openUrl(QUrl("https://sourceforge.net/projects/pstoedit/", QUrl::StrictMode));
 };
 

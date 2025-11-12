@@ -64,7 +64,8 @@ PsToEditOptions& PsToEditOptions::theOptions() // singleton
 
 #include "psfront.h"
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) && !defined(__APPLE__)
+#define CANITERATEOVERLIBS 1
 // for iterating over shared libraries
 #include <link.h>
 #endif
@@ -275,7 +276,8 @@ ProgramOptions* getProgramOptionsForDriver(const char* driverName) {
 
 
 #ifndef UPPVERSION
-#ifndef _MSC_VER
+//{ ifndef UPPVERSION
+#if defined(CANITERATEOVERLIBS)
 static int dl_iterate_callback(struct dl_phdr_info *info, size_t size, void *data){
 	if (size && info && strstr(info->dlpi_name, "libpstoedit.so.")) {
 //		cout << "found libpstoedit.so in " << info->dlpi_name << endl;
@@ -322,7 +324,7 @@ void loadpstoeditplugins(const char *progname, ostream & errstream, bool verbose
 	    }
 	  }
 	}
-#ifndef _MSC_VER
+#if defined(CANITERATEOVERLIBS)
 	if (!pluginsloaded) {
 	  // finally try the directory where libpstoedit.so.0 was found
 	  // libpstoedit.so.0
@@ -354,6 +356,7 @@ void loadpstoeditplugins(const char *progname, ostream & errstream, bool verbose
 #endif
 
 }
+//not UPPVERSION }
 #endif
 
 extern FILE *yyin;				// used by lexer
@@ -980,7 +983,7 @@ To get the pre 8.00 behaviour, either use -dNOEPS or run the file with (filename
 			if (drvbase::pstoeditDataDir() != "") {
 				RSString test(drvbase::pstoeditDataDir());
 				test += directoryDelimiter;
-#if defined(PSTOEDIT_UNIXLIKE)
+#if (defined(unix) || defined(__unix__) || defined(_unix) || defined(__unix) || defined(__EMX__) || defined (NetBSD) ) && !defined(DJGPP)
 				test += "unix";
 #else
 				test += "windows";
@@ -1291,12 +1294,13 @@ To get the pre 8.00 behaviour, either use -dNOEPS or run the file with (filename
 					if (driveroptions == "-88") {
 						inFileStream << "	/jtxt3 false cdef\n";
 					}
-					inFileStream << "	/pstoedit.textastext where { pop pstoedit.textastext not {/joutln true def } if } if \n" "	/pstoedit.preps2ai false def \n" "}{ \n" "	pop\n"	// second run (after ps2ai.ps)
-						"	pstoedit.inputfilename run \n"
-						//  "   (\\" << successstring << "\\n) jp"
-						//  "   pstoedit.quitprog \n"
-						"   showpage \n"
-						"} ifelse \n" << endl;
+					inFileStream << "	/pstoedit.textastext where { pop pstoedit.textastext not {/joutln true def } if } "
+						        "if \n" "	/pstoedit.preps2ai false def \n" "}{ \n" "	pop\n"	// second run (after ps2ai.ps)
+						        "	pstoedit.inputfilename run \n"
+						        //  "   (\\" << successstring << "\\n) jp"
+						        //  "   pstoedit.quitprog \n"
+						        "   showpage \n"
+						        "} ifelse \n" << endl;
 
 				} else {
 					successstring = "% normal end reached by pstoedit.pro";
@@ -1325,18 +1329,6 @@ To get the pre 8.00 behaviour, either use -dNOEPS or run the file with (filename
 // rcw2: Current RiscOS port of gs can't find its fonts without this...
 #ifdef riscos
 				commandline.addarg("-I<GhostScript$Dir>");
-#endif
-#if 0
-				// now handled by the next block (pioptions)
-				char *gsargs = getRegistryValue(errstream, "common", "GS_LIB");
-				if (gsargs) {
-					char *inclDirective = new char[strlen(gsargs) + 3];
-					strcpy(inclDirective, "-I");
-					strcat(inclDirective, gsargs);
-					commandline.addarg(inclDirective);
-					delete[]inclDirective;
-					delete[]gsargs;
-				}
 #endif
 				const char *pioptions = defaultPIoptions(errstream, generalOptions.verbose());
 				if (pioptions && (strlen(pioptions) > 0)) {
@@ -1629,7 +1621,6 @@ static DriverDescription_S* getPstoeditDriverInfo_internal(bool withgsdrivers)
 	assert(curR);
 	const DriverDescription* const* dd = getglobalRp()->rp;
 	unsigned int groupID = 1; // ID for each format/format group. single drivers get an own group.
-#if 1
 	for (unsigned int i = 0; dd[i]; i++) {
 		if (dd[i]->variants() > 1) {
 			if (dd[i] == dd[i]->variant(0)) {
@@ -1641,10 +1632,6 @@ static DriverDescription_S* getPstoeditDriverInfo_internal(bool withgsdrivers)
 			groupID++;
 		}
 		const DriverDescription* currentDD = dd[i];
-#else
-		while (dd && (*dd)) {
-			const DriverDescription* currentDD = *dd;
-#endif
 
 		assert(currentDD);
 		if (currentDD->nativedriver || withgsdrivers) {
@@ -1661,9 +1648,6 @@ static DriverDescription_S* getPstoeditDriverInfo_internal(bool withgsdrivers)
 			curR->formatGroup = groupID;
 			curR++;
 		}
-#if 0
-		dd++;
-#endif
 	}
 	assert(curR);
 	curR->symbolicname = nullptr;	// indicator for end
