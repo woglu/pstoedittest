@@ -41,7 +41,7 @@ from the root directory of the project.
 The first command will first update all the autotools related files needed by the subsequent configure and make.
 pstoedit still uses the classical autotools instead of Cmake and the like.
 
-## Cleanup
+### Cleanup after build
 After a full build you can use the following steps to remove all the files which were generated during the build.
 ```bash
   make clean
