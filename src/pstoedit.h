@@ -84,7 +84,6 @@ int pstoedit_plainC(int argc,
                     const char * const psinterpreter  /* if 0, then pstoedit will look for one using whichpi() */
                    );
 
-/* extern "C" DLLEXPORT const class DriverDescription* const * getPstoeditDriverInfo(ostream& errstream); */
 #ifdef __cplusplus
 extern "C" DLLEXPORT 
 #endif

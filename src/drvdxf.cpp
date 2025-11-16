@@ -1,7 +1,7 @@
 /* 
    drvDXF.cpp : This file is part of pstoedit 
 
-   Copyright (C) 1993 - 2024 Wolfgang Glunz, wglunz35_AT_pstoedit.net
+   Copyright (C) 1993 - 2025 Wolfgang Glunz, wglunz35_AT_pstoedit.net
 
 	DXF Backend Version 0.9 ( LINEs only, no Text, no color, no linewidth )
 	(see if polyaslines )

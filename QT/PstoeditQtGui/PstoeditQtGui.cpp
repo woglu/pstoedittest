@@ -85,7 +85,7 @@ PstoeditQtGui::PstoeditQtGui(int argc_p, char ** argv_p, std::ostream& logStream
 		if (lastSlash) {
 			*lastSlash = '\0';
 		}
-		if (path_to_exe && strlen(path_to_exe)) {
+		if (strlen(path_to_exe)) {
 		  abs_path = std::filesystem::absolute(path_to_exe);
 		} else {
 		  abs_path = std::filesystem::current_path(); 
@@ -260,7 +260,7 @@ void PstoeditQtGui::mapoptionstodialog() {
 	// found.
 
 	// box for format selection
-	const DriverDescription_S* ptr = getPstoeditDriverInfo_plainC();
+	DriverDescription_S* ptr = getPstoeditDriverInfo_plainC();
 	const DriverDescription_S* driverInfoIterator = ptr;
 	formatSelector = new QComboBox(ui.tab_ifo);
 	int currentGroup = 1;
@@ -334,6 +334,7 @@ void PstoeditQtGui::mapoptionstodialog() {
 	ui.tabWidget->setCurrentWidget(ui.tab_ifo);
 
 	updateOutputSuffix();
+	clearPstoeditDriverInfo_plainC(ptr);
 }
 
 void PstoeditQtGui::quit() {
