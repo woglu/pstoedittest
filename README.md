@@ -46,7 +46,7 @@ After a full build you can use the following steps to remove all the files which
 ```bash
   make clean
   sh rm_generated.sh
-````
+```
 
 ### Installation in Windows
 
@@ -57,11 +57,13 @@ So far a binary is provided only for Windows, i.e no make system despite the ava
 
 [GNU GPLv2](https://choosealicense.com/licenses/gpl-2.0/)
 
+## Web site
+
+See here for more information. 
+[pstoedit.com](https://pstoedit.com/)
 
 ## Support
 
 For support, email wglunz35_AT_pstoedit.net.
 
 If you want to support the development of pstoedit any further or just find the program very useful consider a small donation.
-
-
