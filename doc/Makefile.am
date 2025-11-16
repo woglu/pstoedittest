@@ -94,7 +94,7 @@ pstoedit.rtf : pstoedit.1
 
 MOSTLYCLEANFILES = pstoedit.aux pstoedit.log pstoedit.out pstoedit.dvi
 
-CLEANFILES = pstoedit.ps pstoedit.pdf pstoedit.1 pstoedit.htm pstoedit.texi \
+CLEANFILES = pstoedit.ps pstoedit.pdf pstoedit.1 pstoedit.texi \
 	  pstoedit.info pstoedit.txt pstoedit.rtf generalhelplong.tex \
 	  generalhelpshort.tex driverhelp.tex
 endif
