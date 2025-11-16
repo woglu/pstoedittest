@@ -50,7 +50,9 @@ After a full build you can use the following steps to remove all the files which
 
 ### Installation in Windows
 
+```sh
 winget install pstoedit
+```
 
 So far a binary is provided only for Windows, i.e no make system despite the availability of the source code. This is because the provided binary is based on several third party libraries and building them upfront is sometimes quite complex.
 ## License
