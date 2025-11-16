@@ -59,8 +59,7 @@ So far a binary is provided only for Windows, i.e no make system despite the ava
 
 ## Web site
 
-See here for more information. 
-[pstoedit.com](https://pstoedit.com/)
+See here for more information - [pstoedit.com](https://pstoedit.com/).
 
 ## Support
 
