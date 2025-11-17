@@ -13,6 +13,7 @@ letters.ps					\
 oneimg.ps					\
 pathtest.ps					\
 spiral.ps					\
+tiger.ps					\
 textmat.ps					\
 twopages.ps					\
 woglim.ps

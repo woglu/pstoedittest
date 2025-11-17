@@ -46,6 +46,11 @@ rm -f \
 	src/stamp-h1 \
 	QT/PstoeditQtGui/Makefile.qt \
 	QT/PstoeditQtGui/.qmake.stash \
+        QT/PstoeditQtGui/PstoeditQtGui \
+        QT/PstoeditQtGui/moc_PstoeditQtGui.cpp \
+        QT/PstoeditQtGui/moc_predefs.h \
+        QT/PstoeditQtGui/qrc_PstoeditQtGui.cpp \
+        QT/PstoeditQtGui/ui_PstoeditQtGui.h \
 	`find . -name Makefile`
 
 
