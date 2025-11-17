@@ -51,6 +51,7 @@ rm -f \
         QT/PstoeditQtGui/moc_predefs.h \
         QT/PstoeditQtGui/qrc_PstoeditQtGui.cpp \
         QT/PstoeditQtGui/ui_PstoeditQtGui.h \
+        QT/PstoeditQtGui/*.o \
 	`find . -name Makefile`
 
 
