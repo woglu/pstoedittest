@@ -680,7 +680,7 @@ void drvIDRAW::print_header(const char *objtype)
 	double dash[4];
 	const int dashpieces = sscanf_s(dashPattern(), "[ %lf %lf %lf %lf",
 							&dash[0], &dash[1], &dash[2], &dash[3]);
-	if (dashpieces) {
+	if (dashpieces>0) {
 		unsigned int dashbits = 0;  // was unsigned short initially
 		for (int i = 0; i < 4; i++) {
 			const unsigned int numbits = std::min((unsigned int)sizeof(dashbits)*8,iscale((float)dash[i % dashpieces]));
